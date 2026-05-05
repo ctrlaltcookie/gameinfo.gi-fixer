@@ -1,6 +1,7 @@
 # powered by delicious sweets
 
 from tkinter import *
+import tkinter.messagebox
 from tkinter import ttk
 from tkinter import filedialog
 import tkinter.font as tkFont
@@ -100,15 +101,11 @@ def addons_mod_folder_callback():
    addons_folder_path = filedialog.askdirectory(
       initialdir="C:\\Program Files (x86)\\Steam\\steamapps\\common\\Deadlock\\game\\citadel\\addons",
       )
-   print("this is the addon folder path")
-   print(addons_folder_path)
-   print("this is the mod folder path")
-   print(mod_folder_path)
    for zip_file_to_extract in os.scandir(mod_folder_path):
       print(zip_file_to_extract.path)
       patoolib.extract_archive(zip_file_to_extract.path, outdir=addons_folder_path)
-   print("done")
-   
+   tkinter.messagebox.showinfo("Everything is fine",  "Well done your shit is modded")
+
 addons_folder_button = Button(
    tk_window,
    text='''click me to install mods to addons''',
