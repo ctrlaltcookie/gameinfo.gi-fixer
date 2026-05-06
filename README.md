@@ -1,7 +1,7 @@
 # gameinfo.gi-fixer
 fixes your gameinfo.gi for modding purposes, it's cross os compatible probably maybe idk i haven't tested it
 
-# how to use
+# how to run
 to run it as as script:
 you need python to run this, get python [here:](https://www.python.org/downloads/windows/)
 
@@ -17,7 +17,9 @@ to run it as an exe from release?????
 
 I do not know, probably download and it works, but honestly it really just might not work at all either way, this is 100% a silly project to prove it takes about 8 hours to make this sort of software.
 
-## how to run
+## how to use
+`just click each button and find the folders, ez`
+
 clikc first button to mod your gameinfo file so you can run mods
 
 click second button to locate the folder that contains your downloaded mods
