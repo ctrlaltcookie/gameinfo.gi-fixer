@@ -2,6 +2,7 @@
 fixes your gameinfo.gi for modding purposes, it's cross os compatible probably maybe idk i haven't tested it
 
 # how to use
+to run it as as script:
 you need python to run this, get python [here:](https://www.python.org/downloads/windows/)
 
 you need tkinter to install this:
@@ -11,6 +12,10 @@ you need patoolib to install this:
 `pip install patoolib`
 
 and probably some kind of unraring tool, but if you're on windows it'll work fine, if you're on linux idk goodlukc thumbemoji
+
+to run it as an exe from release?????
+
+I do not know, probably download and it works, but honestly it really just might not work at all either way, this is 100% a silly project to prove it takes about 8 hours to make this sort of software.
 
 ## how to run
 clikc first button to mod your gameinfo file so you can run mods
