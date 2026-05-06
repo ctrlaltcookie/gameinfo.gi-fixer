@@ -1,5 +1,5 @@
-# gameinfo.gi-fixer
-fixes your gameinfo.gi for modding purposes, it's cross os compatible probably maybe idk i haven't tested it
+# SDMI - also known as .... STIMMY!
+Edits your gameinfo file to allow mods and installs mods by unzipping and putting them in the right location, this can all be done by hand, but this is faster! yippeee
 
 ### NOTE and **Warning**
 
