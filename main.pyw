@@ -13,23 +13,40 @@ import patoolib
 
 # intiiate tkinter shit
 tk_window = Tk()
+tk_window.title("Stimmy the SDMI")
 tk_window.geometry("800x600")
 # this is just because its hilarious to have a horrible colour <3
-tk_window.config(bg="blue")
+tk_window.config(bg="white")
 
-# Define a custom font / so the fucking shit is visibile innit
+# Define a custom font / so the fucking shit is visible innit
 custom_font = tkFont.Font(family="Arial", size=15)
-instructuions = ttk.Label(tk_window, text="this is a small app to do mod managing without all the shit faff", font=custom_font, background="white")
 
-instructuions.pack()
+instructions = ttk.Label(tk_window, text="Tell us where your steam installation is!", font=custom_font, background="light blue")
+instructions.pack()
+
 mod_folder_path = False
+steam_folder_path = False
+steamapps_folder_path = os.path.join("steamapps","common","Deadlock","game","citadel")
 
-# get the file name and edit the file
-def file_name_callback():
-   file_path = filedialog.askopenfilename(
-      initialdir="C:\\Program Files (x86)\\Steam\\steamapps\\common\\Deadlock\\game\\citadel\\",
-      initialfile="gameinfo.gi"
-   )
+def steam_folder_locator():
+      global steam_folder_path
+      steam_folder_path = filedialog.askdirectory(
+         initialdir="C:\\Program Files (x86)\\Steam\\",
+      )
+
+steam_path_button = Button(
+   tk_window,
+   text='''Locate Steam Install!''',
+   command=steam_folder_locator,
+   font=custom_font
+)
+
+steam_path_button.pack()
+
+# get the gameinfo location and edit it
+def edit_game_info():
+   global steam_folder_path
+   file_path = os.path.join(steam_folder_path, steamapps_folder_path, "gameinfo.gi")
 
    with open(file_path, 'r+') as file:
       file_content = file.read()
@@ -60,61 +77,45 @@ def file_name_callback():
          file.truncate()
       file.close()
 
-# button so cavemen get the file name
-file_name_button = Button(
-   tk_window,
-   text='''click me to mod gameinfo''',
-   command=file_name_callback,
-   font=custom_font
-)
+instructions_two = ttk.Label(tk_window, text="Tell us where your mods folder is!", font=custom_font, background="pink")
+instructions_two.pack()
 
-file_name_button.pack()
-
-instructuions_two = ttk.Label(tk_window, text="show us where your mods folder is", font=custom_font, background="pink")
-
-instructuions_two.pack()
-
-def mod_folder_callback():
+def mod_folder_locator():
    global mod_folder_path
    mod_folder_path = filedialog.askdirectory(
          initialdir="C:\\mods",
       )
 
-folder_button = Button(
+mod_folder_locator_button = Button(
    tk_window,
-   text='''click me to find mods folder''',
-   command=mod_folder_callback,
+   text='''Locate Mods Folder!''',
+   command=mod_folder_locator,
    font=custom_font
 )
+mod_folder_locator_button.pack()
 
-folder_button.pack()
-
-instructuions_three = ttk.Label(tk_window, 
-   text='''show us where your addons folder is 
-   (shoudl be in Deadlock\\game\\citadel\\addons)''', 
-   font=custom_font, 
-   background="pink")
-instructuions_three.pack()
-
-def addons_mod_folder_callback():
+def unpack_mods_to_addons_folder():
    global mod_folder_path
-   addons_folder_path = filedialog.askdirectory(
-      initialdir="C:\\Program Files (x86)\\Steam\\steamapps\\common\\Deadlock\\game\\citadel\\addons",
-      )
+
+   addons_folder_path = os.path.join(steam_folder_path, steamapps_folder_path, "addons")
+
    for zip_file_to_extract in os.scandir(mod_folder_path):
       print(zip_file_to_extract.path)
       patoolib.extract_archive(zip_file_to_extract.path, outdir=addons_folder_path)
-   tkinter.messagebox.showinfo("Everything is fine",  "Well done your shit is modded")
+   tkinter.messagebox.showinfo("Update!",  "Mods installed! You can close the program now.")
 
-addons_folder_button = Button(
+def install_mods_and_edit_gameinfo():
+   edit_game_info()
+   unpack_mods_to_addons_folder()
+
+install_mods_and_edit_gameinfo_button = Button(
    tk_window,
-   text='''click me to install mods to addons''',
-   command=addons_mod_folder_callback,
+   text='''Install Mods!''',
+   command=install_mods_and_edit_gameinfo,
    font=custom_font
 )
-
-addons_folder_button.pack()
+install_mods_and_edit_gameinfo_button.pack()
 
 tk_window.mainloop()
 
-# this shit was made by cookie in a single fucking day why are you using AI you fucking hacks
+# Made by cookie in 2 days okay maybe this is harder than i thought
